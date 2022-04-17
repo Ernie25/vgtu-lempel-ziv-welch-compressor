@@ -1,2 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello world!");
+﻿using LZW;
+using LZW.LZW;
+
+Compressor compressor = new();
+CompressorRunner compressorRunner = new(compressor);
+
+compressorRunner.Run();

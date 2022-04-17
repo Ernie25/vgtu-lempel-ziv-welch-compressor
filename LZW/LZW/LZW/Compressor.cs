@@ -1,9 +1,9 @@
 ﻿
 namespace LZW.LZW
 {
-    public class Compressor
+    public class Compressor : ICompressor
     {
-        private const short  Ascii_Length = 255;
+        private const short Ascii_Length = 255;
         public Dictionary<string, int> Dictionary { get; private set; }
         public List<int> CompressedCode { get; private set; }
 
@@ -27,7 +27,8 @@ namespace LZW.LZW
                 if (Dictionary.ContainsKey(past + current))
                 {
                     past += current;
-                } else
+                }
+                else
                 {
                     CompressedCode.Add(Dictionary[past]);
                     int lastIndex = Dictionary.Last().Value;
@@ -72,9 +73,18 @@ namespace LZW.LZW
             FillDictionary();
         }
 
+        public void PrintCompressedData(List<int> compressedData)
+        {
+            foreach (int item in compressedData)
+            {
+                Console.Write($"{item} ");
+            }
+            Console.WriteLine();
+        }
+
         private void FillDictionary()
         {
-            for(int i = 0; i <= Ascii_Length; i++)
+            for (int i = 0; i <= Ascii_Length; i++)
             {
                 Dictionary.Add(((char)i).ToString(), i);
             }
