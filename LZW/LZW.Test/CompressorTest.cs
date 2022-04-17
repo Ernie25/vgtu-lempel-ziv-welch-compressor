@@ -39,6 +39,20 @@ namespace LZW.Test
             }
         }
 
+        [Theory]
+        [MemberData(nameof(EncodingData))]
+        public void Test_Decode_StringSuccessfullyDecoded(string decompressedString, List<int> compressedData)
+        {
+            // Arrange
+            Compressor compressor = new();
+
+            // Act
+            string result = compressor.Decode(compressedData);
+
+            // Assert
+            Assert.Equal(result, decompressedString);
+        }
+
         private static IEnumerable<object[]> EncodingData()
         {
             yield return new object[] {
